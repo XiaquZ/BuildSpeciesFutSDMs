@@ -3,7 +3,7 @@ Build_VRT <- function(tile_paths) {
 
   for (species in species_names) {
     t.list <- list.files(
-      species_tiles[grepl(species, basename(species_tiles))],
+      tile_paths[grepl(species, basename(tile_paths))],
       full.names = T
     )
     r <- vrt(t.list)

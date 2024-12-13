@@ -6,25 +6,11 @@
 # Load packages required to define the pipeline:
 library(targets)
 library(tarchetypes)
-library(clustermq)
+library(crew)
 
-## Settings for clustermq
-options(
-  clustermq.scheduler = "slurm",
-  clustermq.template = "./cmq.tmpl" # if using your own template
-)
-
-# Set target options:
+# Setting up for using crew.
 tar_option_set(
-  resources = tar_resources(
-    clustermq = tar_resources_clustermq(template = list(
-      job_name = "auto-sdms",
-      per_cpu_mem = "8000mb",
-      n_tasks = 1,
-      per_task_cpus = 36,
-      walltime = "20:00:00"
-    ))
-  )
+  controller = crew_controller_local(workers = 6)
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
